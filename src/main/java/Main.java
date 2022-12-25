@@ -4,15 +4,13 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
-//        new Server().startServer();
         final var server = new Server();
 
         // добавление handler'ов (обработчиков)
         server.addHandler("GET", "/messages", (request, out) -> {
             sendResponse(out,"Hello from GET /message");
         });
-        server.
-                addHandler("POST", "/messages", (request, out) -> {
+        server.addHandler("POST", "/messages", (request, out) -> {
             sendResponse(out, "Hello from POST /messages");
         });
 
