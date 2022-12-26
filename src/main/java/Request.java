@@ -44,8 +44,11 @@ public class Request {
     }
 
     public String getQueryParam(String name) {
-        for( NameValuePair param : queryParams){
-            if( name.equals(param.getName())){
+        if(queryParams.isEmpty()) return null;
+
+        for (NameValuePair param : queryParams){
+            if (name.equals(param.getName())){
+                System.out.println("Query param for " + name + " : "  + param.getValue());
                 return param.getValue();
             }
         }
@@ -54,6 +57,11 @@ public class Request {
     }
 
     public List<NameValuePair> getQueryParams() {
+        for (NameValuePair param : queryParams){
+            System.out.println("Query name: " +
+                    param.getName() + ", query param: " +
+                    param.getValue());
+        }
         return queryParams;
     }
 

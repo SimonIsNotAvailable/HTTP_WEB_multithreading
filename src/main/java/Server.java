@@ -21,7 +21,7 @@ public class Server {
     public void listen(int port) {
         try {
             serverSocket = new ServerSocket(port);
-            System.out.println("Server Started");
+            System.out.println("Server started");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -32,14 +32,16 @@ public class Server {
     }
 
     public void listenConnection() {
+        while(true) {
 
-        try {
-            final var socket = serverSocket.accept();
+            try {
+                final var socket = serverSocket.accept();
 
-            service.submit(() -> new ConnectionHandler(socket, handlers).handle());
+                service.submit(() -> new ConnectionHandler(socket, handlers).handle());
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

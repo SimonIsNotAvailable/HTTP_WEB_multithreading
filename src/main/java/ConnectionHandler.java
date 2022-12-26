@@ -27,15 +27,15 @@ public class ConnectionHandler {
 
     public void handle() {
 
-        try {
-            final var in = new BufferedInputStream(socket.getInputStream());
-            final var out = new BufferedOutputStream(socket.getOutputStream());
+            try {
+                final var in = new BufferedInputStream(socket.getInputStream());
+                final var out = new BufferedOutputStream(socket.getOutputStream());
 
-            handleRequest(in, out);
+                handleRequest(in, out);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
     private void handleRequest(BufferedInputStream in, BufferedOutputStream out) throws Exception {
@@ -107,12 +107,15 @@ public class ConnectionHandler {
             path = uri.substring(0, uri.indexOf('?'));
             List<NameValuePair> queryParams = URLEncodedUtils.parse(new URI(uri), Charset.defaultCharset());
             request.setQueryParams(queryParams);
+            request.getQueryParams();
         } else {
             path = uri;
         }
 
         request.setMethod(method);
+        System.out.println("Method:  " + method);
         request.setPath(path);
+        System.out.println("Path: " + path);
 
         return requestLineEnd + requestLineDelimiter.length;
     }
@@ -147,6 +150,7 @@ public class ConnectionHandler {
             final var bodyBytes = in.readNBytes(length);
             String body = new String(bodyBytes);
             request.setBody(body);
+            System.out.println("Body: " + body);
         }
     }
 
